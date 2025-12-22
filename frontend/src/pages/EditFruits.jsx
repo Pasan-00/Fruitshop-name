@@ -30,6 +30,10 @@ const EditFruits = () => {
   const [foodname, setFoodname] = useState('');
   const [quantity, setQuantity] = useState('');
   const [price, setPrice] = useState('');
+  const [unitType, setUnitType] = useState('weight')
+  const [unitAmount, setUnitAmount] = useState(100)
+  const [unitUnit, setUnitUnit] = useState('g')
+  const [stockUnits, setStockUnits] = useState(0)
   const [image, setImage] = useState(null);
   const [discount, setDiscount] = useState('');
   const [total, setTotal] = useState('');
@@ -62,12 +66,32 @@ const EditFruits = () => {
     setLoading(true);
     axios.get(`http://localhost:5555/fruits/${id}`)
       .then((response) => {
-        const { foodname, quantity, price, discount, image } = response.data;
+        const { foodname, quantity, price, discount, image, unitType: uType, unitAmount: uAmount, unitUnit: uUnit, unitValue: uValue, stockUnits: sUnits } = response.data;
         setFoodname(foodname);
         setQuantity(quantity);
         setPrice(price);
         setDiscount(discount);
         setCurrentImage(image);
+        setStockUnits(sUnits ?? 0)
+        setUnitType(uType || 'weight')
+        if (uAmount != null && uUnit) {
+          setUnitAmount(uAmount)
+          setUnitUnit(uUnit)
+        } else if (uValue) {
+          const m = String(uValue).trim().match(/^([0-9]*\.?[0-9]+)\s*(\w+)?/)
+          if (m) {
+            setUnitAmount(parseFloat(m[1]))
+            setUnitUnit(m[2] || (uType === 'pieces' ? 'piece' : 'g'))
+          }
+        } else {
+          if (uType === 'pieces') {
+            setUnitAmount(1)
+            setUnitUnit('piece')
+          } else {
+            setUnitAmount(100)
+            setUnitUnit('g')
+          }
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -89,8 +113,12 @@ const EditFruits = () => {
 
       const data = {
         foodname,
-        quantity,
+        quantity: quantity || `${unitAmount}${unitUnit}`,
         price,
+        unitType,
+        unitAmount: isNaN(parseFloat(unitAmount)) ? unitAmount : parseFloat(unitAmount),
+        unitUnit,
+        stockUnits: Number(stockUnits || 0),
         image: base64Image,
         discount,
         total,
@@ -99,7 +127,7 @@ const EditFruits = () => {
       console.log('Submitting data:', data); // Debugging line
 
       await axios.put(`http://localhost:5555/fruits/${id}`, data);
-      navigate('/');
+      navigate('/manager/overview');
     } catch (error) {
       alert('An error occurred. Please check the console.');
       console.error(error);
@@ -134,7 +162,7 @@ const EditFruits = () => {
                 required
               />
             </div>
-            <div className='my-4'>
+            {/* <div className='my-4'>
               <label className='text-xl mr-4 text-gray-500' htmlFor='quantity'>Weight</label>
               <input
                 id='quantity'
@@ -144,9 +172,67 @@ const EditFruits = () => {
                 className='bg-gray-200 px-4 py-2 w-full rounded-lg'
                 required
               />
-            </div>
+            </div> */}
             <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500' htmlFor='price'>Price</label>
+              <label className='text-xl mr-4 text-gray-500' htmlFor='unitType'>Unit Type</label>
+              <select
+                id='unitType'
+                value={unitType}
+                onChange={(e) => {
+                  const v = e.target.value
+                  setUnitType(v)
+                  if (v === 'weight') {
+                    setUnitAmount(100)
+                    setUnitUnit('g')
+                  } else {
+                    setUnitAmount(1)
+                    setUnitUnit('piece')
+                  }
+                }}
+                className='bg-gray-200 px-4 py-2 w-full rounded-lg'
+              >
+                <option value='weight'>Weight (price per weight unit)</option>
+                <option value='pieces'>Pieces (price per piece)</option>
+              </select>
+            </div>
+
+            <div className='my-4 grid grid-cols-2 gap-4'>
+              <div>
+                <label className='text-xl mr-4 text-gray-500' htmlFor='unitAmount'>Unit Amount</label>
+                <input
+                  id='unitAmount'
+                  type='number'
+                  value={unitAmount}
+                  onChange={(e) => setUnitAmount(e.target.value)}
+                  className='bg-gray-200 px-4 py-2 w-full rounded-lg'
+                  required
+                />
+              </div>
+              <div>
+                <label className='text-xl mr-4 text-gray-500' htmlFor='unitUnit'>Unit</label>
+                <select
+                  id='unitUnit'
+                  value={unitUnit}
+                  onChange={(e) => setUnitUnit(e.target.value)}
+                  className='bg-gray-200 px-4 py-2 w-full rounded-lg'
+                >
+                  {unitType === 'weight' ? (
+                    <>
+                      <option value='g'>g</option>
+                      <option value='kg'>kg</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value='piece'>piece</option>
+                      <option value='pack'>pack</option>
+                    </>
+                  )}
+                </select>
+              </div>
+            </div>
+
+            <div className='my-4'>
+              <label className='text-xl mr-4 text-gray-500' htmlFor='price'>Price (for the selected unit)</label>
               <input
                 id='price'
                 type='text'
@@ -154,6 +240,16 @@ const EditFruits = () => {
                 onChange={(e) => setPrice(e.target.value)}
                 className='bg-gray-200 px-4 py-2 w-full rounded-lg'
                 required
+              />
+            </div>
+            <div className='my-4'>
+              <label className='text-xl mr-4 text-gray-500' htmlFor='stockUnits'>Stock (number of units)</label>
+              <input
+                id='stockUnits'
+                type='number'
+                value={stockUnits}
+                onChange={(e) => setStockUnits(e.target.value)}
+                className='bg-gray-200 px-4 py-2 w-full rounded-lg'
               />
             </div>
           </div>

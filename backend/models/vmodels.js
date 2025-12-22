@@ -6,12 +6,27 @@ const fruitSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        quantity: {
-            type: Number,
-        },
+
         price: {
             type: Number,
         },
+            unitType: {
+                type: String,
+                enum: ['weight', 'pieces'],
+                default: 'weight',
+            },
+            unitAmount: {
+                type: Number,
+                default: 100,
+            },
+            unitUnit: {
+                type: String,
+                default: 'g',
+            },
+            stockUnits: {
+                type: Number,
+                default: 0,
+            },
         image: {
             type: String, 
             required: true,

@@ -15,7 +15,7 @@ const  DeleteFruits= () => {
     .delete(`http://localhost:5555/fruits/${id}`)
     .then(()=> {
       setLoading(false);
-      navigate('/');
+      navigate('/manager/overview');
       
     })
     .catch((error) =>{

@@ -3,9 +3,10 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
+import { computePricePer100g, formatCurrency, getUnitInfo, getStockLabel } from '../utils/units'
 
 const ShowFruits= () => {
-  const[vegi, setFruits] = useState({});
+  const[fruit, setFruit] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
@@ -14,7 +15,7 @@ const ShowFruits= () => {
     axios
       .get(`http://localhost:5555/fruits/${id}`)
       .then((response) => {
-          setFruits(response.data);
+          setFruit(response.data);
           setLoading(false);
         }
       )
@@ -41,19 +42,47 @@ const ShowFruits= () => {
           </div>
           <div className='my-4'> 
             <span className='text-xl mr-4 text-gray-500'>Quantity</span>
-            <span>{fruit.quantity}</span>
+            <span>{getStockLabel(fruit)}</span>
           </div>
           <div className='my-4'> 
-            <span className='text-xl mr-4 text-gray-500'>Price</span>
-            <span>{fruit.price}</span>
+            <span className='text-xl mr-4 text-gray-500'>Price (per unit)</span>
+            <span>
+              {(() => {
+                const amount = fruit.unitAmount ?? (fruit.unitValue ? parseFloat(String(fruit.unitValue)) : null)
+                const unit = fruit.unitUnit ?? (fruit.unitValue ? String(fruit.unitValue).replace(/^[0-9\s\.]+/, '').trim() : (fruit.unitType === 'pieces' ? 'piece' : 'g'))
+                const unitLabel = amount != null ? `${amount}${unit}` : (fruit.unitValue || (fruit.unitType === 'pieces' ? '1 piece' : '100g'))
+                const normalized = computePricePer100g(amount, unit, fruit.price)
+                return (
+                  <>
+                    {`Rs. ${fruit.price} / ${unitLabel}`}
+                    {normalized != null && (
+                      <div className="text-xs text-gray-500">(~Rs. {formatCurrency(normalized)} / 100g)</div>
+                    )}
+                  </>
+                )
+              })()}
+            </span>
           </div>
+          {fruit.discount ? (
+            <div className='my-4'>
+              <span className='text-xl mr-4 text-gray-500'>Discounted Price</span>
+              <span>
+                {(() => {
+                  const amount = fruit.unitAmount ?? (fruit.unitValue ? parseFloat(String(fruit.unitValue)) : null)
+                  const unit = fruit.unitUnit ?? (fruit.unitValue ? String(fruit.unitValue).replace(/^[0-9\s\.]+/, '').trim() : (fruit.unitType === 'pieces' ? 'piece' : 'g'))
+                  const unitLabel = amount != null ? `${amount}${unit}` : (fruit.unitValue || (fruit.unitType === 'pieces' ? '1 piece' : '100g'))
+                  return `Rs. ${fruit.total} / ${unitLabel}`
+                })()}
+              </span>
+            </div>
+          ) : null}
           <div className='my-4'> 
             <span className='text-xl mr-4 text-gray-500'>Create Time</span>
-            <span>{new Date(fruit.createdAt).toString()}</span>
+            <span>{fruit.createdAt ? new Date(fruit.createdAt).toString() : ''}</span>
           </div>
           <div className='my-4'> 
             <span className='text-xl mr-4 text-gray-500'>Last Update Time</span>
-            <span>{new Date(fruit.updatedAt).toString()}</span>
+            <span>{fruit.updatedAt ? new Date(fruit.updatedAt).toString() : ''}</span>
           </div>
         </div>
       )}
