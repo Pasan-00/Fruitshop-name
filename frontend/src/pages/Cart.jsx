@@ -35,7 +35,7 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="container mx-auto py-12">
+      <main className="container mx-auto py-20 flex-1 px-4">
         <h1 className="text-3xl font-bold text-center mb-6">Your Cart</h1>
         <p className="text-center text-gray-600 mb-8">Items you added to your cart will appear here.</p>
 

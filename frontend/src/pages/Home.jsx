@@ -7,6 +7,7 @@ import { computePricePer100g, formatCurrency, getUnitInfo, getStockLabel } from 
 import { useToast } from '../context/ToastContext';
 import { ShoppingCart, TrendingUp, Package } from 'lucide-react';
 
+
 const decodeBase64 = (base64String) => {
   try {
     const base64Data = base64String.startsWith('data:image/')
@@ -69,11 +70,7 @@ const Home = () => {
           
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img
-              src="src/assets/logo.png"
-              alt="Fruity Cart Logo"
-              className="w-20 h-20 object-contain"
-            />
+            
             {/* <span className="text-2xl font-bold hidden sm:block">
               Fruity Cart
             </span> */}
