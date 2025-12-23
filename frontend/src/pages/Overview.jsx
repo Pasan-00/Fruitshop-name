@@ -180,10 +180,10 @@ const Overview = () => {
                     </h3>
                   </Link>
 
-                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
+                  {/* <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
                     <Package className="w-4 h-4" />
                     <span>{fruit.quantity}</span>
-                  </div>
+                  </div> */}
 
                   <div className="mb-4">
                     {fruit.discount ? (

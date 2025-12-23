@@ -7,21 +7,11 @@ import cors from 'cors';
 
 const app = express();
 
-//Middleware for parsing request body
-app.use(express.json());
+//Middleware for parsing request body with increased size limit
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-//Middleware for handling CORS policy
-//option 1: Aloow All Orgins with default of cors(*)
 app.use(cors());
-//option 2:Allow Custom Origins
-// app.use(
-//     cors({
-//         origin: 'http://localhost:3000',
-//         methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//         allowedHeaders:['Content-Type']
-//     })
-// )
-
 
 
 app.use('/fruits',fruitsRoute);

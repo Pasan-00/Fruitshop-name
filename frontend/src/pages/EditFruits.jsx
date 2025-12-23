@@ -28,7 +28,7 @@ const decodeBase64 = (base64String) => {
 
 const EditFruits = () => {
   const [foodname, setFoodname] = useState('');
-  const [quantity, setQuantity] = useState('');
+  // const [quantity, setQuantity] = useState('');
   const [price, setPrice] = useState('');
   const [unitType, setUnitType] = useState('weight')
   const [unitAmount, setUnitAmount] = useState(100)
@@ -66,9 +66,9 @@ const EditFruits = () => {
     setLoading(true);
     axios.get(`http://localhost:5555/fruits/${id}`)
       .then((response) => {
-        const { foodname, quantity, price, discount, image, unitType: uType, unitAmount: uAmount, unitUnit: uUnit, unitValue: uValue, stockUnits: sUnits } = response.data;
+        const { foodname, price, discount, image, unitType: uType, unitAmount: uAmount, unitUnit: uUnit, unitValue: uValue, stockUnits: sUnits } = response.data;
         setFoodname(foodname);
-        setQuantity(quantity);
+        // setQuantity(quantity);
         setPrice(price);
         setDiscount(discount);
         setCurrentImage(image);
@@ -113,7 +113,7 @@ const EditFruits = () => {
 
       const data = {
         foodname,
-        quantity: quantity || `${unitAmount}${unitUnit}`,
+        // quantity: quantity || `${unitAmount}${unitUnit}`,
         price,
         unitType,
         unitAmount: isNaN(parseFloat(unitAmount)) ? unitAmount : parseFloat(unitAmount),

@@ -53,7 +53,7 @@ const CreateFruits = () => {
       const unitLabel = `${unitAmount}${unitUnit}`;
       const data = {
         foodname,
-        quantity: quantity || unitLabel,
+        // quantity: quantity || unitLabel,
         price,
         unitType,
         unitAmount: Number(unitAmount),

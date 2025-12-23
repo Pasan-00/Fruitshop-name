@@ -10,7 +10,7 @@ const FruitTable = ({fruits}) => {
             <tr>
               <th className='border border-slate-600 rounded-md'>No</th>
               <th className='border border-slate-600 rounded-md'>Food Name</th>
-              <th className='border border-slate-600 rounded-md max-md:hidden'>Quantity</th>
+              {/* <th className='border border-slate-600 rounded-md max-md:hidden'>Quantity</th> */}
               <th className='border border-slate-600 rounded-md max-md:hidden'>Price</th>
               <th className='border border-slate-600 rounded-md'>Operation</th>
             </tr>
@@ -24,9 +24,9 @@ const FruitTable = ({fruits}) => {
                 <td className='border border-slate-700 rounded-md text-center'>
                   {fruit.foodname}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                {/* <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
                   {fruit.quantity}
-                </td>
+                </td> */}
                 <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
                   {fruit.price}
                 </td>
