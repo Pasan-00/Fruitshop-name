@@ -17,7 +17,7 @@ const MNavbar = () => {
       href: '/fruits/create'
     },
     {
-      title: 'Analytics',
+      title: 'Orders',
       icon: TrendingUp,
       href: '#'
     }
@@ -91,19 +91,6 @@ const MNavbar = () => {
               })}
             </ul>
 
-            {/* Stats Card */}
-            <div className="mt-8 p-4 bg-gradient-to-br from-blue-900/30 to-purple-900/30 border border-blue-800/50 rounded-xl">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-blue-400" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">This Month</p>
-                  <p className="text-lg font-bold text-white">+24%</p>
-                </div>
-              </div>
-              <p className="text-xs text-gray-400">Sales increased compared to last month</p>
-            </div>
           </nav>
 
           {/* User Section */}

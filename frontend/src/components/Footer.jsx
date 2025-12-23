@@ -13,7 +13,7 @@ const Footer = () => {
               <p className="text-green-100">Get fresh fruits delivered to your doorstep</p>
             </div>
             <a
-              href="/products"
+              href="/"
               className="group relative px-8 py-4 bg-white text-green-600 font-bold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-1"
             >
               <span className="relative z-10">Shop Now</span>
@@ -76,7 +76,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/products" className="text-gray-400 hover:text-green-500 transition-colors duration-200 flex items-center gap-2 group">
+                  <a href="/" className="text-gray-400 hover:text-green-500 transition-colors duration-200 flex items-center gap-2 group">
                     <span className="w-0 h-0.5 bg-green-500 group-hover:w-4 transition-all duration-200"></span>
                     Products
                   </a>

@@ -79,16 +79,16 @@ const Home = () => {
           {/* Center Content */}
           <div className="text-center flex-1">
             <h1 className="text-5xl font-bold mb-4 animate-fade-in">
-              Fruity Cart
+              Fresh Fruits Delivered
             </h1>
             <p className="text-xl text-green-100 mb-8">
-              Book now and Pickup Your Farm-fresh quality Fruits
+              Farm-fresh quality at your doorstep
             </p>
 
             <div className="flex justify-center gap-8 text-sm">
               <div className="flex items-center gap-2">
                 <Package className="w-5 h-5" />
-                <span>Fresh Fruits</span>
+                <span>Available Free Delivery</span>
               </div>
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-5 h-5" />
@@ -209,17 +209,7 @@ const Home = () => {
           })}
         </div>
 
-        {/* <div className="mt-16 text-center">
-          <a
-            href="/products"
-            className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-          >
-            View All Products
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div> */}
+
       </div>
 
       <Footer />
