@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import mongoose from 'mongoose';
 import { mongoDBURL } from '../config.js';
 import { Fruit } from '../models/vmodels.js';
