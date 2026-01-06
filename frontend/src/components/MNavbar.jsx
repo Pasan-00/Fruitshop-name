@@ -15,12 +15,12 @@ const MNavbar = () => {
       title: 'Add Product',
       icon: Plus,
       href: '/fruits/create'
-    },
-    {
-      title: 'Orders',
-      icon: TrendingUp,
-      href: '#'
     }
+    // {
+    //   title: 'Orders',
+    //   icon: TrendingUp,
+    //   href: '#'
+    // }
   ];
 
   return (

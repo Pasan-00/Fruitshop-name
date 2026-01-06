@@ -206,7 +206,7 @@ const CreateFruits = () => {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2" htmlFor="price">
-                      <DollarSign className="w-4 h-4" />
+            
                       Price (for the selected unit) *
                     </label>
                     <input
@@ -316,14 +316,14 @@ const CreateFruits = () => {
                     </div>
                   )}
 
-                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                  {/* <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
                     <p className="text-xs text-blue-800 mb-2 font-semibold">Quick Tips:</p>
                     <ul className="text-xs text-blue-700 space-y-1">
                       <li>• Use high-quality images for better presentation</li>
                       <li>• Set accurate stock levels to avoid overselling</li>
                       <li>• Discounts are optional but can boost sales</li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

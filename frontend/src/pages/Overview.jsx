@@ -109,7 +109,7 @@ const Overview = () => {
                   <p className="text-3xl font-bold text-gray-800">{fruits.length}</p>
                 </div>
                 <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
-                  <Package className="w-7 h-7 text-blue-600" />
+                  {/* <Package className="w-7 h-7 text-blue-600" /> */}
                 </div>
               </div>
             </div>
@@ -123,7 +123,7 @@ const Overview = () => {
                   </p>
                 </div>
                 <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
-                  <DollarSign className="w-7 h-7 text-green-600" />
+                  {/* <DollarSign className="w-7 h-7 text-green-600" /> */}
                 </div>
               </div>
             </div>
@@ -137,7 +137,7 @@ const Overview = () => {
                   </p>
                 </div>
                 <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center">
-                  <Tag className="w-7 h-7 text-orange-600" />
+                  {/* <Tag className="w-7 h-7 text-orange-600" /> */}
                 </div>
               </div>
             </div>

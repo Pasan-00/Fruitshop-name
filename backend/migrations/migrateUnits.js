@@ -2,14 +2,7 @@ import mongoose from 'mongoose';
 import { mongoDBURL } from '../config.js';
 import { Fruit } from '../models/vmodels.js';
 
-/**
- * Migration script: convert legacy free-text `unitValue` or similar `quantity`
- * strings into structured `unitAmount`, `unitUnit`, and `unitType` fields.
- *
- * Usage:
- *  - Dry run (no DB writes): `node migrations/migrateUnits.js --dry`
- *  - Apply changes: `node migrations/migrateUnits.js`
- */
+
 
 const dry = process.argv.includes('--dry') || process.env.DRY === '1';
 
